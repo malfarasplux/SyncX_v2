@@ -75,8 +75,8 @@ list_of_metrics_slw = [syncm.lin_reg_r_metric,
 #                      syncm.correlation_coeff,
                       ]
 
-text_list_of_metrics = ["cross_corr_max"]
-list_of_metrics_slw = [syncm.cross_corr_max]
+#text_list_of_metrics = ["cross_corr_max"]
+#list_of_metrics_slw = [syncm.cross_corr_max]
 
 
 ###############################################################################
