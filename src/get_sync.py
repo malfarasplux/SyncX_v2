@@ -4,10 +4,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn import preprocessing 
 import novainstrumentation as ni
+import json
+
+# Config
+with open("./config.json") as conf_file:  
+    conf = json.load(conf_file)
+# json.dumps(conf, indent=4)
+# print(conf)
 
 #Load signals
 txtload = True
-filepath = "./BVP_RESPchest_4_1_4"
+filepath = conf["AcqPath"]
 
 raw_A, rawtime, srate = syncm.loadsignal(filepath, 1, txtload)
 raw_B, rawtime, srate = syncm.loadsignal(filepath, 3, txtload)

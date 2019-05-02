@@ -1,4 +1,5 @@
 {
-    "AcqPath": "./",
+    "AcqPath": "./BVP_RESPchest_4_1_4",
     "Platform": "PLUX"
+    "srate": 1000
 }
