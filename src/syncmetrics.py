@@ -260,4 +260,5 @@ def rsp_peak_detect(a, sampling_rate, th_scale):
 def cross_corr_max(a,b):
     a = a.flatten()
     b = b.flatten()
-    return np.argmax(np.correlate(a, b, "full"))/(2*len(a)-1)
+#    return np.argmax(np.correlate(a, b, "full"))/(2*len(a)-1)
+    return np.argmax(np.correlate(a, b, "full"))
