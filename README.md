@@ -8,8 +8,8 @@ Synchrony exploration through a sensing lens (PLUX sensors + OpenSignals + pytho
 [4. Configuration](#config)  
 
 ##  Code to assess synchrony between two signals <a name="syncassess"></a>
-[syncmetrics.py](./src/sync_assess.py)  
-[get_sync.py](./src/sync_assess.py)  
+[syncmetrics.py](./src/syncmetrics.py)  
+[get_sync.py](./src/get_sync.py)  
 
 ##  0. TODO List<a name="todo"></a>
 
