@@ -6,30 +6,33 @@ from sklearn import preprocessing
 import novainstrumentation as ni
 import json
 
-# Config
+# Load config and signals
 with open("./config.json") as conf_file:  
     conf = json.load(conf_file)
+
 # json.dumps(conf, indent=4)
 # print(conf)
 
-#Load signals
-txtload = True
+srate = conf["srate"]
 filepath = conf["AcqPath"]
+txtload = True
 
 raw_A, rawtime, srate = syncm.loadsignal(filepath, 1, txtload)
 raw_B, rawtime, srate = syncm.loadsignal(filepath, 3, txtload)
 
 #Signal  clipping
-startpoint = 70*srate
-endpoint = -10*srate
-#startpoint = 0
-#endpoint = len(raw_A)
+#startpoint = 70*srate
+#endpoint = -10*srate
+startpoint = 0
+endpoint = len(raw_A)
 signal_A = raw_A[startpoint:endpoint]
 signal_B = raw_B[startpoint:endpoint]
 time = rawtime[startpoint:endpoint]
 t_offset = time[0]
 time = time - t_offset
 sampletime = np.arange(len(signal_A))
+
+
 
 # SHADI's neurokit RSP peak detect
 detect_peaks = True
@@ -54,7 +57,6 @@ text_list_of_metrics = [ "lin_reg_r",
                          "normdiff",              # normalised diff
                          "cosine_similarity"]     # cosine similarity (reshape needed) CRASH                        
 #                         "correlation_coeff",    # correlation coefficient 
-#                         "lin_reg_r"]             # linear regression correl
                            
 
 list_of_metrics_slw = [syncm.lin_reg_r_metric,
@@ -67,10 +69,10 @@ list_of_metrics_slw = [syncm.lin_reg_r_metric,
                       syncm.normdiff,
                       syncm.cos_similarity
 #                      syncm.correlation_coeff,
-#                      syncm.lin_reg_r_metric
                       ]
 
-
+#text_list_of_metrics = ["MSC"]
+#list_of_metrics_slw = [syncm.MSC]
 
 
 ###############################################################################

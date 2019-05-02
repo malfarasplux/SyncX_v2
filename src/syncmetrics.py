@@ -223,6 +223,11 @@ def MPC(a,b):
 # TODO Hardcoded sampling rate problem
 def MSC(a,b):
 #    f, Cxy = coherence(a, b , sampling_rate, nperseg=1024)
+    if a.shape[1] == 1:
+        a = a.reshape(len(a))
+    if b.shape[1] == 1:
+        b = b.reshape(len(b))
+        
     sampling_rate = 1000
     f, Cxy = coherence(a, b , sampling_rate, nperseg=1024)
     coh_mean=np.mean(Cxy)
