@@ -64,8 +64,8 @@ text_list_of_metrics = [ "lin_reg_r",
 
 list_of_metrics_slw = [syncm.lin_reg_r_metric,
 #                      syncm.inst_phase_difference,
-                      syncm.MPC,
                       syncm.cross_corr_max,
+                      syncm.MPC,
                       syncm.MSC,
                       syncm.similar_der_smooth,
                       syncm.similar_der,
@@ -75,8 +75,8 @@ list_of_metrics_slw = [syncm.lin_reg_r_metric,
 #                      syncm.correlation_coeff,
                       ]
 
-#text_list_of_metrics = ["MSC"]
-#list_of_metrics_slw = [syncm.MSC]
+text_list_of_metrics = ["cross_corr_max"]
+list_of_metrics_slw = [syncm.cross_corr_max]
 
 
 ###############################################################################
