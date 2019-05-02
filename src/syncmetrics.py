@@ -143,11 +143,15 @@ def cos_similarity(a, b):
 
 # Compute metric slw
 def compute_metric_slw(a,b,f, window=1000, overlap=.5):
-    """Compute metric over a sliding window 
+    """Compute f metric over a sliding window
+    using signals a,b sampled with srate
     window is expressed in samples
     overlap sets the steps for the sliding window
+    srate is the sampling rate
     returns averaged result value in window and times at computation 
     """
+    print(f)
+
     result = []
     time = []
     time_x = []
@@ -189,6 +193,7 @@ def correlation_coeff(a,b):
 
 # Instantaneous phase
 # TODO hardcoded srate problem
+# TODO freq return instead of phase problem
 def comp_inst_phase(x_temp):
     if x_temp.ndim != 1:
         x_temp = x_temp.reshape(len(x_temp))
