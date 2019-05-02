@@ -197,15 +197,13 @@ def correlation_coeff(a,b):
 def comp_inst_phase(x_temp):
     if x_temp.ndim != 1:
         x_temp = x_temp.reshape(len(x_temp))
-    sampling_rate = 1000
+#    sampling_rate = 1000
     analytic_signal = hilbert(x_temp)
     analytic_signal=np.array(analytic_signal)
     instantaneous_phase = np.unwrap(np.angle(analytic_signal))
-    instantaneous_frequency = (np.diff(instantaneous_phase) /(2.0*np.pi) * sampling_rate)
-    instantaneous_frequency = np.append(instantaneous_frequency,instantaneous_frequency[-1])
-    return instantaneous_frequency
+    return instantaneous_phase
 
-## phase difference## 
+## phase difference, averaged## 
 # TODO: Check order convention b,a
 def inst_phase_difference(a,b):  
     inst_phase_sig1=comp_inst_phase(a)
@@ -226,6 +224,7 @@ def MPC(a,b):
 # why is nperseg = 1024 ? 
 # TODO Check reference https://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.coherence.html
 # TODO Hardcoded sampling rate problem
+# Magnitude-squared coherence
 def MSC(a,b):
 #    f, Cxy = coherence(a, b , sampling_rate, nperseg=1024)
     if a.shape[1] == 1:
@@ -258,4 +257,7 @@ def rsp_peak_detect(a, sampling_rate, th_scale):
             ind_cycle += [onset[i]]
     return ind_cycle
 
-
+def cross_corr_max(a,b):
+    a = a.flatten()
+    b = b.flatten()
+    return np.argmax(np.correlate(a, b, "full"))/(2*len(a)-1)

@@ -27,6 +27,8 @@ startpoint = 0
 endpoint = len(raw_A)
 signal_A = raw_A[startpoint:endpoint]
 signal_B = raw_B[startpoint:endpoint]
+smooth_A = syncm.smoothing(signal_A)
+smooth_B = syncm.smoothing(signal_B)
 time = rawtime[startpoint:endpoint]
 t_offset = time[0]
 time = time - t_offset
@@ -48,7 +50,8 @@ if detect_peaks:
 
 
 text_list_of_metrics = [ "lin_reg_r",
-                         "inst_phase_difference",
+#                         "inst_phase_difference",
+                         "cross_corr_max",
                          "MPC",
                          "MSC",
                          "similar der_smooth",    # similar derivative sm
@@ -60,8 +63,9 @@ text_list_of_metrics = [ "lin_reg_r",
                            
 
 list_of_metrics_slw = [syncm.lin_reg_r_metric,
-                      syncm.inst_phase_difference,
+#                      syncm.inst_phase_difference,
                       syncm.MPC,
+                      syncm.cross_corr_max,
                       syncm.MSC,
                       syncm.similar_der_smooth,
                       syncm.similar_der,
@@ -120,6 +124,7 @@ plotdim = 6
 #for metric in list_of_metrics_slw[:j]:
 for metric in list_of_metrics_slw:
     print(metric)
+#    m,t = syncm.compute_metric_slw(smooth_A,smooth_B,metric, window=12000,overlap=.9)  ## window=win , half win, double win
     m,t = syncm.compute_metric_slw(signal_A,signal_B,metric, window=12000,overlap=.9)  ## window=win , half win, double win
 #    axs[i + i_offset].plot(t,m)
 #    axs[int((i + i_offset) % plotdim),int((i + i_offset)/plotdim)].plot(t, m, str('C' + str((i+1))),label=text_list_of_metrics[i])
@@ -127,3 +132,15 @@ for metric in list_of_metrics_slw:
     axs[int((i + i_offset) % plotdim),int((i + i_offset)/plotdim)].plot(t, m, str('C' + str((i+1))))
     axs[int((i + i_offset) % plotdim),int((i + i_offset)/plotdim)].set_title(text_list_of_metrics[i])
     i=i+1
+#
+#plt.plot(syncm.comp_inst_phase(smooth_A))
+#plt.plot(syncm.comp_inst_phase(smooth_B))
+#
+#
+#plt.plot(syncm.comp_inst_phase(smooth_A[:10000]))
+#plt.plot(syncm.comp_inst_phase(smooth_B[:10000]))
+#
+#plt.plot(np.diff(syncm.comp_inst_phase(smooth_A[:10000])))
+#plt.plot(np.diff(syncm.comp_inst_phase(smooth_B[:10000])))
+#
+#syncm.lin_reg_r_metric(smooth_A,smooth_B)
